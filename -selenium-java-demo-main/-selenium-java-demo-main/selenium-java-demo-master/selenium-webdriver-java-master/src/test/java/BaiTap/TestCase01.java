@@ -1,4 +1,4 @@
-package test;
+package BaiTap;
 
 import driver.driverFactory;
 import org.openqa.selenium.*;
@@ -12,21 +12,6 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
-/*
-
-Test Steps
-
-Step 1. Go to http://live.techpanda.org/
-
-Step 2. Verify Title of the page
-
-Step 3. Click on -> MOBILE -> menu
-
-Step 4. In the list of all mobile , select SORT BY -> dropdown as name
-
-Step 5. Verify all products are sorted by name
-
-*/
 @Test
 public class TestCase01 {
     private static final String url = "http://live.techpanda.org/";
@@ -47,9 +32,10 @@ public class TestCase01 {
         File srcFile = screenshot.getScreenshotAs(OutputType.FILE);
         String autoAllocate = "screenshot2.png";
         FileHandler.copy(srcFile, new File(destFile + autoAllocate));
+        driver.quit();
     }
 
-    public static void main(String[] args) {
-        TestCase01();
+    public static void main(String[] args) throws InterruptedException, IOException {
+        testCase01();
     }
 }
