@@ -1,4 +1,4 @@
-package test;
+package BaiTap;
 
 import driver.driverFactory;
 import org.openqa.selenium.*;
@@ -36,9 +36,10 @@ public class TestCase02 {
         File srcFile = screenshot.getScreenshotAs(OutputType.FILE);
         String autoAllocate = "screenshot3.png";
         FileHandler.copy(srcFile, new File(destFile + autoAllocate));
+        driver.quit();
     }
 
-    public static void main(String[] args) {
-        TestCase2();
+    public static void main(String[] args) throws InterruptedException, IOException {
+        testCase02();
     }
 }
