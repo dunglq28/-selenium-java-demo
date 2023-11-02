@@ -2,25 +2,29 @@ package BaiTap;
 
 import POM.RegisterPage;
 import driver.driverFactory;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.io.File;
 
 public class TestCase05 {
     @Test
     public static void Testcase05(){
+        int scc =0;
         String firstName = "Quang";
         String lastName = "Dung";
-        String email = "LeQuangDungtest22813123sasd@gmail.com";
+        String email = "lequangdung@gmail.com";
         String password = "123456";
         String confirmPassword = password;
 
         WebDriver driver = driverFactory.getChromeDriver();
         try{
-
+            //Step 1. Go to http://live.techpanda.org/
             driver.get("http://live.techpanda.org/");
+
+            //Step 2. Click on my account link
             RegisterPage registerPage = new RegisterPage(driver);
 
             registerPage.clickMyAccountLink();
@@ -74,11 +78,16 @@ public class TestCase05 {
             WebElement wishlistSharedMessage = driver.findElement(By.xpath("//span[normalize-space()='Your Wishlist has been shared.']"));
             Assert.assertEquals(wishlistSharedMessage.getText(),"Your Wishlist has been shared.");
 
+           //take a picture
+            scc = (scc + 5);
+            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            String png = "D:\\\\-selenium-java-demo-main\\\\-selenium-java-demo-main\\\\selenium-java-demo-master\\\\screenshot\\\\" + scc + ".png";
+            FileUtils.copyFile(srcFile, new File(png));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Test failed due to exception: " + e.getMessage());
         } finally {
-            // Đóng trình duyệt
+            // Close
             driver.quit();
         }
     }
